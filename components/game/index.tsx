@@ -7,9 +7,9 @@ import { RulesButton } from "../rules-button";
 function Game() {
   return (
     <View style={styles.container}>
-      <Header />
+      <Header style={styles.header} />
       <PicksPentagon />
-      <RulesButton />
+      <RulesButton style={styles.rulesButton} />
     </View>
   );
 }
@@ -19,8 +19,13 @@ const styles = StyleSheet.create({
     height: "100%",
     width: "90%",
     marginLeft: "auto",
-    marginRight: "auto",
-    justifyContent: "space-between"
+    marginRight: "auto"
+  },
+  header: {
+    marginBottom: "auto"
+  },
+  rulesButton: {
+    marginTop: "auto"
   }
 });
 

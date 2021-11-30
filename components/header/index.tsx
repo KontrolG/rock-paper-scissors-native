@@ -1,12 +1,14 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, ViewProps } from "react-native";
 import { COLORS } from "../../lib/constants/styles";
 import { LogoBonus } from "../logo-bonus";
 import { Score } from "../score";
 
-function Header() {
+interface HeaderProps extends ViewProps {}
+
+function Header({ style, ...props }: HeaderProps) {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]} {...props}>
       <View style={styles.title}>
         <LogoBonus />
       </View>

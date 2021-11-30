@@ -1,11 +1,13 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, ViewProps } from "react-native";
 import { COLORS } from "../../lib/constants/styles";
 import Text from "../styled-text";
 
-function RulesButton() {
+interface RulesButtonProps extends ViewProps {}
+
+function RulesButton({ style, ...props }: RulesButtonProps) {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]} {...props}>
       <Text style={styles.text}>Rules</Text>
     </View>
   );
