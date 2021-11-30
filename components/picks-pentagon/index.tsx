@@ -1,54 +1,52 @@
 import React from "react";
-import { useWindowDimensions, View, StyleSheet } from "react-native";
-import { Pick } from "../pick";
-import { COLORS } from "../../lib/constants/styles";
-import { ScissorsIcon } from "../scissors-icon";
-import { SpockIcon } from "../spock-icon";
-import { PaperIcon } from "../paper-icon";
-import { RockIcon } from "../rock-icon";
-import { LizardIcon } from "../lizard-icon";
+import {
+  useWindowDimensions,
+  View,
+  StyleSheet,
+  GestureResponderEvent,
+  ViewProps
+} from "react-native";
+import { PickButton } from "../pick-button";
 import { PentagonBackground } from "../pentagon-background";
+import { PICKS_NAMES } from "../../lib/types/picks";
+import useStore from "../../lib/hooks/store";
+import { PICKS_PROPS } from "../../lib/constants/picks";
 
-const PICKS_PROPS = {
-  SCISSORS: {
-    colors: COLORS.SCISSORS_GRADIENT,
-    icon: <ScissorsIcon />
-  },
-  SPOCK: {
-    colors: COLORS.SPOCK_GRADIENT,
-    icon: <SpockIcon />
-  },
-  PAPER: {
-    colors: COLORS.PAPER_GRADIENT,
-    icon: <PaperIcon />
-  },
-  ROCK: {
-    colors: COLORS.ROCK_GRADIENT,
-    icon: <RockIcon />
-  },
-  LIZARD: {
-    colors: COLORS.LIZARD_GRADIENT,
-    icon: <LizardIcon />
+interface CustomPickButtonProps {
+  pickName: PICKS_NAMES;
+  onPress?: (pickName: PICKS_NAMES, event: GestureResponderEvent) => void;
+}
+
+function CustomPickButton({ pickName, onPress }: CustomPickButtonProps) {
+  function handleOnPress(event: GestureResponderEvent) {
+    onPress?.(pickName, event);
   }
-};
+  return <PickButton {...PICKS_PROPS[pickName]} onPress={handleOnPress} />;
+}
 
-function PicksPentagon() {
+interface PicksPentagonProps extends ViewProps {}
+
+function PicksPentagon({ style, ...props }: PicksPentagonProps) {
   const { height } = useWindowDimensions();
-  const test = height * 0.035;
+  const secondRowTopOffset = -height * 0.035;
+  const setYouPick = useStore(({ setYouPick }) => setYouPick);
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]} {...props}>
       <PentagonBackground style={styles.background} />
       <View style={styles.topRow}>
-        <Pick {...PICKS_PROPS.SCISSORS} />
+        <CustomPickButton
+          pickName={PICKS_NAMES.SCISSORS}
+          onPress={setYouPick}
+        />
       </View>
-      <View style={[styles.middleRow, { top: -test }]}>
-        <Pick {...PICKS_PROPS.SPOCK} />
-        <Pick {...PICKS_PROPS.PAPER} />
+      <View style={[styles.middleRow, { top: secondRowTopOffset }]}>
+        <CustomPickButton pickName={PICKS_NAMES.SPOCK} onPress={setYouPick} />
+        <CustomPickButton pickName={PICKS_NAMES.PAPER} onPress={setYouPick} />
       </View>
       <View style={styles.bottomRow}>
-        <Pick {...PICKS_PROPS.LIZARD} />
-        <Pick {...PICKS_PROPS.ROCK} />
+        <CustomPickButton pickName={PICKS_NAMES.LIZARD} onPress={setYouPick} />
+        <CustomPickButton pickName={PICKS_NAMES.ROCK} onPress={setYouPick} />
       </View>
     </View>
   );

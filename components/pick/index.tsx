@@ -1,33 +1,26 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React, { ReactNode } from "react";
-import {
-  StyleSheet,
-  TouchableOpacity,
-  TouchableOpacityProps,
-  useWindowDimensions,
-  View
-} from "react-native";
+import { StyleSheet, useWindowDimensions, View } from "react-native";
 
-interface PickProps extends TouchableOpacityProps {
+export interface PickProps {
   colors: string[];
   icon: ReactNode;
+  size?: number;
 }
 
-function Pick({ colors, icon, ...props }: PickProps) {
+function Pick({ colors, icon, size }: PickProps) {
   const dimensions = useWindowDimensions();
-  const containerWidth = dimensions.width / 3;
+  const containerWidth = typeof size === "number" ? size : dimensions.width / 3;
   const innerContainerWidth = containerWidth * 0.8;
 
   return (
-    <TouchableOpacity activeOpacity={0.6} {...props}>
-      <LinearGradient colors={colors} style={getStyles(containerWidth)}>
-        <View
-          style={[getStyles(innerContainerWidth), { backgroundColor: "white" }]}
-        >
-          {icon}
-        </View>
-      </LinearGradient>
-    </TouchableOpacity>
+    <LinearGradient colors={colors} style={getStyles(containerWidth)}>
+      <View
+        style={[getStyles(innerContainerWidth), { backgroundColor: "white" }]}
+      >
+        {icon}
+      </View>
+    </LinearGradient>
   );
 }
 
