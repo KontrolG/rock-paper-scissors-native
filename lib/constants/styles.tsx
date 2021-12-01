@@ -8,5 +8,6 @@ export const COLORS = {
   TEXT: "white",
   DARK_TEXT: "hsl(229, 25%, 31%)",
   SCORE_TEXT: "hsl(229, 64%, 46%)",
-  HEADER_OUTLINE: "hsl(217, 16%, 45%)"
+  HEADER_OUTLINE: "hsl(217, 16%, 45%)",
+  LIGHT: "white"
 };
