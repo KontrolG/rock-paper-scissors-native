@@ -6,7 +6,7 @@ import { Pick } from "../pick";
 import Text from "../styled-text";
 import Maybe from "../maybe";
 import { PICKS_NAMES } from "../../lib/types/picks";
-import useTimeout from "../../lib/hooks/use-Timeout";
+import useTimeout from "../../lib/hooks/use-timeout";
 import { HOUSE_PICKING_DELAY } from "../../lib/constants/game-config";
 import { getRandomPick } from "../../lib/utils/get-random-pick";
 import { PickPlaceholder } from "../pick-placeholder";
