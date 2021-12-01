@@ -1,0 +1,1 @@
+export const HOUSE_PICKING_DELAY = 2000;
